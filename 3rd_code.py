@@ -7,7 +7,7 @@ def mapper(row):
 
 def run_analysis():
     df = pd.read_csv("forestfires.csv")
-    print(f"✅ Loaded {len(df)} rows\n")
+    print(f" Loaded {len(df)} rows\n")
 
     # MapReduce: Average temperature
     rows = [row for _, row in df.iterrows()]
@@ -28,11 +28,12 @@ def run_analysis():
     df.to_sql("forestfires", conn, index=False)
 
     query = "SELECT Month, AVG(Burned_Area_hectares) AS avg FROM forestfires GROUP BY Month ORDER BY avg DESC"
-    print("\n🔥 Avg Burned Area (SQL):")
+    print("\nAvg Burned Area (SQL):")
     print(pd.read_sql_query(query, conn).to_string(index=False))
 
     conn.close()
-    print("\n✅ Complete")
+    print("\n Complete")
 
 if __name__ == "__main__":
+
     run_analysis()
